@@ -25,9 +25,10 @@ def choose_card(player):
 	while True:
 		again_flag = True
 		print return_dic.keys()
+		print "カードの場所:",
 		input_line = raw_input()
 		try:
-			print input_line, return_dic[int(input_line)]
+			print "カードの値:", return_dic[int(input_line)]
 			choose_card1_value = return_dic[int(input_line)]
 			temp_dic = copy.deepcopy(return_dic)
 			del temp_dic[int(input_line)]
@@ -35,10 +36,12 @@ def choose_card(player):
 			print "以下の数値からカードを選んで下さい。"
 			while True:
 				print temp_dic.keys()
+				print "カードの場所:",
 				input_line = raw_input()
 				try:
-					print input_line, temp_dic[int(input_line)]
+					print "カードの値:", temp_dic[int(input_line)]
 					if choose_card1_value == temp_dic[int(input_line)]:
+						print "当たりました！"
 						del temp_dic[int(input_line)]
 						return_dic = temp_dic
 						player_dic[player] += 1
@@ -51,11 +54,12 @@ def choose_card(player):
 			if again_flag:
 				break
 			else:
-				print "当たりました！もう一度以下の数値からカードを選んで下さい。"
+				print "もう一度以下の数値からカードを選んで下さい。"
 		except:
 			print "その数値のカードはありません。もう一度以下の数値からカードを選んで下さい。"
 
 	return return_dic
+
 
 print "ルール説明とか"
 print "プレイヤー人数を数値で入力して下さい(二人なら'2'、三人なら'3'のように)"
@@ -70,16 +74,15 @@ for i in range(1, int(input_line1) + 1):
 
 while len(card_dic) != 0:
 	for player in player_dic.keys():
-		print "%sさんの番です。" % player
+		print "------------%sさんの番です--------------" % player
 		card_dic = choose_card(player)
-		print player, player_dic[player]
+		print "%sさんが現在獲得したペア数は%iです。" % (player, player_dic[player])
 		if len(card_dic) == 0:
 			break
 
-
-
-
-
+print "ゲーム終了です。\n-----------ゲーム結果------------"
+for k,v in sorted(player_dic.items(), key=lambda x:x[1], reverse=True):
+	print "%sさんの獲得ペア数:%iペア" % (k,v)
 
 
 
