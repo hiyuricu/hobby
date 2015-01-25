@@ -8,11 +8,8 @@ card_dic = {}
 temp_dic = {}
 
 j = -1
-card_value_list = range(1, 4) * 4
-card_number_list = range(1, 13)
-
-# card_value_list = range(1, 14) * 4
-# card_number_list = range(1, 53)
+card_value_list = range(1, 14) * 4
+card_number_list = range(1, 53)
 random.shuffle(card_number_list)
 
 for i in card_number_list:
